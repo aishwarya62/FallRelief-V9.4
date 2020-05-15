@@ -22,23 +22,23 @@
         <AssociationConnector Association="fall_reliefModel.FK__tbl_RiskA__Asses__339FAB6E" />
         <AssociationConnector Association="fall_reliefModel.FK__tbl_RiskA__AssQu__3493CFA7" />
         <AssociationConnector Association="fall_reliefModel.FK__tbl_RiskA__respo__3587F3E0" />
-        <EntityTypeShape EntityType="fall_reliefModel.tbl_ActionPlan_FoodNutrient" Width="1.5" PointX="12.75" PointY="13.75" />
         <EntityTypeShape EntityType="fall_reliefModel.tbl_ActionPlan_HomeSafety" Width="1.5" PointX="9.75" PointY="7.375" />
-        <EntityTypeShape EntityType="fall_reliefModel.tbl_ActionPlan_Nutrient" Width="1.5" PointX="10.5" PointY="13.875" />
-        <EntityTypeShape EntityType="fall_reliefModel.tbl_ActionPlan_Nutrition" Width="1.5" PointX="12.75" PointY="7.75" />
         <EntityTypeShape EntityType="fall_reliefModel.tbl_ActionPlan_RiskStatement" Width="1.5" PointX="8.75" PointY="10.875" />
         <EntityTypeShape EntityType="fall_reliefModel.vw_ActionPlan_HomeSafety" Width="2.125" PointX="0.75" PointY="10.75" />
-        <AssociationConnector Association="fall_reliefModel.FK__tbl_Actio__Nutri__5AB9788F" />
         <AssociationConnector Association="fall_reliefModel.FK__tbl_Actio__Quest__540C7B00" />
-        <AssociationConnector Association="fall_reliefModel.FK__tbl_Actio__Nutri__58D1301D" />
-        <AssociationConnector Association="fall_reliefModel.FK__tbl_Actio__Quest__55009F39" />
         <AssociationConnector Association="fall_reliefModel.FK__tbl_Actio__Quest__40058253" />
         <EntityTypeShape EntityType="fall_reliefModel.vw_HealthRisk" Width="2.5" PointX="2.75" PointY="6.75" />
         <EntityTypeShape EntityType="fall_reliefModel.vw_QuestionID_Activity" Width="3" PointX="3.25" PointY="10" />
         <EntityTypeShape EntityType="fall_reliefModel.vw_QuestionID_Activity_Steps" Width="1.5" PointX="0.75" PointY="13.75" />
-        <EntityTypeShape EntityType="fall_reliefModel.vw_ActionPlan_DietSolution" Width="3.25" PointX="2.625" PointY="13.625" />
+        <EntityTypeShape EntityType="fall_reliefModel.vw_ActionPlan_DietSolution" Width="3.25" PointX="2.375" PointY="13.75" />
         <EntityTypeShape EntityType="fall_reliefModel.vw_ActionPlan_DietSolutionFood" Width="2.75" PointX="6.375" PointY="13" />
         <EntityTypeShape EntityType="fall_reliefModel.vw_ActionPlan_HealthRisks" Width="2.25" PointX="6" PointY="16" />
+        <EntityTypeShape EntityType="fall_reliefModel.tbl_ActionPlan_NutrientFood" Width="2.375" PointX="15.75" PointY="15" />
+        <EntityTypeShape EntityType="fall_reliefModel.tbl_ActionPlan_NutrientKey" Width="2.375" PointX="11" PointY="16" />
+        <EntityTypeShape EntityType="fall_reliefModel.tbl_ActionPlan_RiskNutrition" Width="2.375" PointX="12.75" PointY="10.25" />
+        <AssociationConnector Association="fall_reliefModel.FK__tbl_Actio__Nutri__793DFFAF" />
+        <AssociationConnector Association="fall_reliefModel.FK__tbl_Actio__Nutri__7A3223E8" />
+        <AssociationConnector Association="fall_reliefModel.FK__tbl_Actio__Quest__7B264821" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

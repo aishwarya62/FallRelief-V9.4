@@ -12,7 +12,7 @@ namespace RiskAssessment.Controllers
 {
     public class HomeController : Controller
     {
-       
+
 
         public ActionResult testflaticon()
         {
@@ -21,15 +21,8 @@ namespace RiskAssessment.Controllers
         public ActionResult Index()
         {
             return View();
-           
-        }
-      
 
-        public ActionResult EmergencyHelplines()
-        {
-            return View();
         }
-
 
         public ActionResult Assessment()
         {
@@ -48,27 +41,27 @@ namespace RiskAssessment.Controllers
 
         }
 
-        public ActionResult Instruction(SessionModel model)
-        {
 
-            if (model != null) 
+        public ActionResult Instruction(SessionModel model, int number)
+        {
+            if (model != null)
             {
                 var _ctx = new fall_reliefEntities();
-                var assessment = _ctx.tbl_RiskAss_Assessment.Where(x => x.AssessmentTypeID == model.AssessmentTypeID).FirstOrDefault();
-                if (assessment != null) 
+                var assessment = _ctx.tbl_RiskAss_Assessment.Where(x => x.AssessmentTypeID == number).FirstOrDefault();
+                if (assessment != null)
                 {
                     ViewBag.AssessmentType = assessment.AssessmentType;
                     ViewBag.AssessmentDescription = assessment.Description;
-                
+
                 }
             }
-                Session["SessionModel"] = model;
-
-            if (model == null)   
+            Session["SessionModel"] = model;
+            model.AssessmentTypeID = number;
+            if (model == null)
                 return RedirectToAction("Assessment");
-            
 
-            return View (model);
+
+            return View(model);
         }
 
         public ActionResult RiskAssessment(SessionModel model)
@@ -97,7 +90,7 @@ namespace RiskAssessment.Controllers
 
             this.Session["SessionID"] = newAssessment.sessionID;
 
-            return RedirectToAction("QuestionAssessment", new { @SessionID = Session["SessionID"]});
+            return RedirectToAction("QuestionAssessment", new { @SessionID = Session["SessionID"] });
         }
 
 
@@ -242,7 +235,7 @@ namespace RiskAssessment.Controllers
             }
             else
             {
-                if (repsonses.Direction.Equals("backwards", StringComparison.CurrentCultureIgnoreCase))
+                if (repsonses.Direction.Equals("backward", StringComparison.CurrentCultureIgnoreCase))
                 {
                     nextQuestionNumber = _ctx.tbl_RiskAss_AssQuestion.Where(x => x.AssessmentTypeID == repsonses.AssessmentTypeID
                     && x.QuestionNumber < repsonses.QuestionID).OrderByDescending(x => x.QuestionNumber).Take(1).Select(x => x.QuestionNumber).FirstOrDefault();
@@ -267,7 +260,8 @@ namespace RiskAssessment.Controllers
         }
 
 
-        public ActionResult AssessmentResult(Guid SessionID) {
+        public ActionResult AssessmentResult(Guid SessionID)
+        {
 
             var _ctx = new fall_reliefEntities();
 
@@ -280,13 +274,13 @@ namespace RiskAssessment.Controllers
                   {
                       AssessmentNo = x.AssessmentNo,
                       AssessmentType = x.AssessmentType,
-                      RiskList = _ctx.vw_RiskAss_RiskStatement.Where(y => y.AssessmentNo == assessment.AssessmentNo).Select(z => new RiskStatementModel() 
-                      { 
+                      RiskList = _ctx.vw_RiskAss_RiskStatement.Where(y => y.AssessmentNo == assessment.AssessmentNo).Select(z => new RiskStatementModel()
+                      {
                           RiskID = z.RiskID,
                           RiskName = z.Risk,
                           RiskStatement = z.Risk_Statement,
                           ImgDir = z.RiskImg
-                     
+
                       }).ToList()
 
                   }).FirstOrDefault();
@@ -308,7 +302,7 @@ namespace RiskAssessment.Controllers
 
             var assessment = _ctx.tbl_RiskAss_Session.Where(x => x.sessionID.Equals(SessionID)).FirstOrDefault();
             var assessmentType = assessment.tbl_RiskAss_Assessment.AssessmentTypeID;
-            
+
 
             ViewBag.AssessmentType = assessment.tbl_RiskAss_Assessment.AssessmentType;
             ViewBag.AssessmentNo = assessment.AssessmentNo;
@@ -333,10 +327,10 @@ namespace RiskAssessment.Controllers
                                   Nutrient = t.Nutrient,
                                   Description = t.SolutionDesc,
                                   Flist = _ctx.vw_ActionPlan_DietSolutionFood.Where(u => u.risk == t.risk && u.AssessmentNo == t.AssessmentNo && u.Nutrient == t.Nutrient).Select(h => new FoodModel
-                                  { 
-                                    Description = h.FoodDescription,
-                                    FoodGroupName = h.FoodGroupName,
-                                    ImgDir = h.imgDir
+                                  {
+                                      Description = h.FoodDescription,
+                                      FoodGroupName = h.FoodGroupName,
+                                      ImgDir = h.imgDir
                                   }).ToList()
                               }).ToList(),
                               Elist = _ctx.vw_QuestionID_Activity.Where(k => k.AssessmentNo == z.AssessmentNo && k.Risk == z.Risk).Select(m => new ExerciseModel
@@ -344,9 +338,9 @@ namespace RiskAssessment.Controllers
                                   Excerise = m.Exercise_name,
                                   ImgDir = m.Exercise_image_link,
                                   Slist = _ctx.vw_QuestionID_Activity_Steps.Where(n => n.actUID == m.actUID).Select(f => new ExceriseSteps
-                                  { 
-                                        StepNo = f.sequenceID,
-                                        Description = f.Exercise_description
+                                  {
+                                      StepNo = f.sequenceID,
+                                      Description = f.Exercise_description
                                   }).ToList()
 
 
@@ -385,6 +379,6 @@ namespace RiskAssessment.Controllers
 
             }
         }
- 
+
     }
 }

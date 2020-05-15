@@ -27,17 +27,21 @@
     <link href="~/Content/homeaction.css" rel="stylesheet" />
 
     <style>
+        .column {
+            padding: 0 10px;
+        }
+
         .collapsible {
             background-color: #777;
             color: white;
             cursor: pointer;
-            padding: 18px;
-            width: 60%;
+            padding: 8px;
+            width: 100%;
             border: none;
             text-align: left;
             outline: none;
-            font-size: 15px;
-            margin: 10px 10px 15px 10px;
+            font-size: 20px;
+            margin: 10px 10px 15px 5px;
         }
 
             .active, .collapsible:hover {
@@ -61,12 +65,11 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.2s ease-out;
-            width: 60%;
+            width: 100%;
         }
 
         img {
-            width: 100%;
-            height: 200px;
+            width: 80%;
         }
 
         #customers {
@@ -98,6 +101,11 @@
                 color: white;
             }
 
+        .card-img-top {
+            width: 100%;
+            height: 15vw;
+            object-fit: cover;
+        }
 
 
         .title {
@@ -112,241 +120,216 @@
         .container-fluid {
             text-align: center;
         }
-
-        .scrollelement {
-            position: fixed;
-            bottom: 40px;
-            right: 30px;
-        }
-
-        .scrollelement:hover {
-            opacity: 0.7;
-        }
-
-
     </style>
 </head>
 <body>
 
-    <nav class="navbar px-md-0 navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-dark" id="ftco-navbar">
-        <div class="container">
-            <a class="navbar-brand" href="/Home/Index">Fall Relief </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
-            </button>
+    <header>
 
-            <div class="collapse navbar-collapse" id="ftco-nav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="/Home/Index" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="/Home/Assessment" class="nav-link">Assessment</a></li>
-                    <li class="nav-item"><a href="/Home/Health Facility" class="nav-link">Health Facility</a></li>
-                </ul>
+
+        <a href="/Home/Index">
+            <img src="~/Content/Fall_Relief_edited_new.png" style="width:20%; height:20%; left:50em" />
+        </a>
+
+        <div id='cssmenu'>
+            <ul>
+                <li><a href="/Home/Index" class="nav-link">Home</a></li>
+                <li><a href="/Home/Assessment" class="nav-link">Assessment</a></li>
+                <li><a href="/Home/Health Facility" class="nav-link">Health Facility</a></li>
+                <li><a href="/Home/EmergencyHelplines" class="nav-link">Emergency Helplines</a></li>
+            </ul>
+        </div>
+    </header>
+
+
+    <section class="ftco-section ftco-no-pt" style="width:100%">
+
+
+        <div class="container">
+            <div class="col-md-12 heading-section text-center">
+                <h2 class="mb-4">Action Plan</h2>
+                <input type="hidden" name="SessionID" value="@(Session["SessionID"])" />
+                <a href="/Home/AssessmentResult" class="btn btn-primary">
+                    Previous
+                </a>
+
+                <!--<a href="/Home/AssessmentResult" class="btn btn-primary" style="padding:4px 30px 4px 30px;margin: 10px 5px">Previous</a>-->
+
             </div>
         </div>
-    </nav>
-
-    <div class="scrollelement">
-        <img src="~/Content/scrolltotop_128.png" onclick='window.scrollTo(0,0);' title="Click to scroll to top at once"
-             style="height: 90%; width: 75%"/>
-    </div>
-
-
-    <div class="container-fluid">
-        <div class="title">
-            <h1>Action Plan</h1>
-            <p>
-                @ViewBag.AssessmentType
-            </p>
-
-        </div>
-    </div>
-
-
-
-
-
-    @section scripts{
-        <script>
-            $(function () {
-                $("#btnPrint").click(function () {
-                    window.print();
-                });
-            });
-        </script>
-    }
-
-
+    </section>
 
 
 
     @if (Model.AssessmentTypeID == 1)
     {
-        <div class="container">
-            @* list out the risks *@
 
+
+
+
+        @* list out the risks *@
+        <section class="ftco-section ftco-no-pt" style="padding-bottom:20px">
 
 
             <div class="container">
-                <img src="../../Content/print.png" alt="A Printer image" title="To save as PDF, select Save as PDF in Printer Option"
-                     style="margin:0px 75px 0px 0px; width: 2cm; height: 2cm; float:right; position:relative" id="btnPrint" />
-                <div style="margin:90px 0px 10px 0px; text-align:right">
-                    <p>Print this page / Save as PDF</p>
+                <div class="col-md-12 heading-section text-center">
+
+                    <h2 class="subheading" style="font-size:18px">Diet Plan</h2>
+                    <p style="font-size:20px;text-align:justify">
+                        Here are some food options you should think to incorporate into your daily diet to help you improve your overall health.
+
+                        The food options below are have been designed to target towards the areas which we have identified to be a risk in increase the likelihood of you falling in the future based off the assessment result.
+                    </p>
+
+
                 </div>
-            </div>
 
 
 
-            <h2>Diet Plan</h2>
 
-            <p>
-                Here are some food options you should think to incorporate into your daily diet to help you improve your overall health.
-            </p>
-            <br />
-            <p>
-                The food options below are have been designed to target towards the areas which we have identified to be a risk in increase the likelihood of you falling in the future based off the assessment result.
-            </p>
 
-            @for (int i = 0; i < Model.Dlist.Count; i++)
-            {
+                @for (int i = 0; i < Model.Dlist.Count; i++)
+                {
 
-                <button class="collapsible">
-                    @Html.Raw(Model.Dlist[i].Risk)
-                </button>
+                    <button class="collapsible">
+                        @Html.Raw(Model.Dlist[i].Risk)
+                    </button>
 
-                <div class="content">
+                    <div class="content">
 
-                    <h2>Here are some nutritious food items that can help you prevent falls</h2>
-                    @for (int x = 0; x < Model.Dlist[i].Nlist.Count; x++)
-                    {
-
-                        <h1>@Html.Raw(Model.Dlist[i].Nlist[x].Nutrient)</h1>
-
-                        <p>@Html.Raw(Model.Dlist[i].Nlist[x].Description)</p>
-
-                        <p>Some of the food sources which contain high @Html.Raw(Model.Dlist[i].Nlist[x].Nutrient) are listed below</p>
-                        for (int z = 0; z < Model.Dlist[i].Nlist[x].Flist.Count; z++)
+                        <h2>Here are some nutritious food items that can help you prevent falls</h2>
+                        @for (int x = 0; x < Model.Dlist[i].Nlist.Count; x++)
                         {
-                            <div class="card-deck">
-                                <div class="card" style="width:300px">
 
-                                    <div class="card-body">
+                            <h1>@Html.Raw(Model.Dlist[i].Nlist[x].Nutrient)</h1>
 
-                                        <h4 class="card-title">@Html.Raw(Model.Dlist[i].Nlist[x].Flist[z].FoodGroupName)</h4>
+                            <p>@Html.Raw(Model.Dlist[i].Nlist[x].Description)</p>
 
-                                        <p class="card-text">>@Html.Raw(Model.Dlist[i].Nlist[x].Flist[z].Description)</p>
+                            <p>Some of the food sources which contain high @Html.Raw(Model.Dlist[i].Nlist[x].Nutrient) are listed below</p>
+
+                            for (int z = 0; z < Model.Dlist[i].Nlist[x].Flist.Count; z++)
+                            {
+                                <div class="column col-md-4">
+                                    <div class="card-deck">
+                                        <div class="card" style="width:500px">
+
+
+                                            <div class="card-body padding:20px">
+
+                                                <h4 class="card-title">@Html.Raw(Model.Dlist[i].Nlist[x].Flist[z].FoodGroupName)</h4>
+
+                                                <p class="card-text">>@Html.Raw(Model.Dlist[i].Nlist[x].Flist[z].Description)</p>
+
+                                            </div>
+                                            <div class="card">
+                                                <img class="card-img-top" src="@Html.Raw(Model.Dlist[i].Nlist[x].Flist[z].ImgDir)" alt="Card image" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                            }
+
+                        }
+                    </div>
+
+                }
+
+                <div class="col-md-12 heading-section text-center">
+
+                    <h2 class="subheading" style="font-size:18px">Exercise Plan</h2>
+                    <p style="font-size:20px;text-align:justify">
+                        Here are some exercises you should think to incorporate into your daily life to help you improve your overall health.
+                        The exercises below are have been designed to target towards the areas which we have identified to be a risk in increase the likelihood of you falling in the future based off the assessment result.
+                    </p>
+
+
+                </div>
+
+                @for (int i = 0; i < Model.Dlist.Count; i++)
+                {
+
+                    <button class="collapsible">
+                        @Html.Raw(Model.Dlist[i].Risk)
+                    </button>
+                    <div class="content">
+                        <p>Below are your targeted exercises with their description to reduce @Html.Raw(Model.Dlist[i].Risk)</p>
+                        @for (int x = 0; x < Model.Dlist[i].Elist.Count; x++)
+                        {
+                            <h1>@Html.Raw(Model.Dlist[i].Elist[x].Excerise)</h1>
+                            <div class="card">
+                                <div class="card-horizontal">
+                                    <img src="@Html.Raw(Model.Dlist[i].Elist[x].ImgDir)" style="width:40%;float:left"/>
+
+
+                                    @for (int z = 0; z < Model.Dlist[i].Elist[x].Slist.Count; z++)
+                                    {
+                                    <div class="body" style="text-align:left">
+                                        <h2>Step:@Html.Raw(Model.Dlist[i].Elist[x].Slist[z].StepNo)</h2>
+
+                                        <p>@Html.Raw(Model.Dlist[i].Elist[x].Slist[z].Description)"</p>
+                                        </div>
+
+                                        }
 
                                     </div>
-
-                                    <img class="card-img-top" src="@Html.Raw(Model.Dlist[i].Nlist[x].Flist[z].ImgDir)" alt="Card image" style="width:100%" />
                                 </div>
-                            </div>
+                                        }
 
+                                    </div>
+                                    }
 
-
-                        }
-
-                    }
-                </div>
-
-
-            }
-
-            <h2>Excerise Plan</h2>
-
-            <p>Here are some exercises you should think to incorporate into your daily life to help you improve your overall health. </p>
-            <br />
-            <p>The exercises below are have been designed to target towards the areas which we have identified to be a risk in increase the likelihood of you falling in the future based off the assessment result.</p>
-
-
-
-            @for (int i = 0; i < Model.Dlist.Count; i++)
-            {
-
-                <button class="collapsible">
-                    @Html.Raw(Model.Dlist[i].Risk)
-                </button>
-                <div class="content">
-                    <p>Below are targeted exercises with their description to reduce @Html.Raw(Model.Dlist[i].Risk)</p>
-                    @for (int x = 0; x < Model.Dlist[i].Elist.Count; x++)
-                    {
-                        <h1>@Html.Raw(Model.Dlist[i].Elist[x].Excerise)</h1>
-                        <img src="@Html.Raw(Model.Dlist[i].Elist[x].ImgDir)" />
-
-
-                        for (int z = 0; z < Model.Dlist[i].Elist[x].Slist.Count; z++)
-                        {
-                            <h2>Step:@Html.Raw(Model.Dlist[i].Elist[x].Slist[z].StepNo)</h2>
-
-                            <p>@Html.Raw(Model.Dlist[i].Elist[x].Slist[z].Description)"</p>
-
-
-                        }
-
-                    }
-
-                </div>
-            }
-
-
-        </div>
+                                </div>
+</section>
     }
 
+
+    
     else
     {
-
-
-        <div class="container">
-            <img src="../../Content/print.png" alt="A Printer image" title="To save as PDF, select Save as PDF in Printer Option"
-                 style="margin:0px 75px 0px 0px; width: 2cm; height: 2cm; float:right; position:relative" id="btnPrint" />
-            <div style="margin:90px 0px 10px 0px; text-align:right">
-                <p>Print this page / Save as PDF</p>
-            </div>
-        </div>
+   
+    <table id="customers">
 
 
 
-        <div class="container">
-            <hr />
+        <tr>
 
-            <table id="customers">
+        <th> Risk </th>
 
+        <th> Action Required</th>
 
+        <th> Location</th>
 
-                <tr>
+        <th> Who</th>
 
-                    <th> Risk </th>
+        <th> Status</th>
 
-                    <th> Action Required </th>
-
-                    <th> Location </th>
-
-                    <th> Who </th>
-
-                    <th> Status </th>
-
-                </tr>
+        </tr>
 
 
 
-                @for (int i = 0; i < Model.HSList.Count; i++)
-                {
-                    <tr>
+        @for (int i = 0; i < Model.HSList.Count; i++)
+        {
+            <tr>
 
-                        <td> @Html.Raw(Model.HSList[i].Risk) </td>
+                <td> @Html.Raw(Model.HSList[i].Risk) </td>
 
-                        <td> @Html.Raw(Model.HSList[i].ActionRequired) </td>
+                <td> @Html.Raw(Model.HSList[i].ActionRequired) </td>
 
-                        <td> @Html.Raw(Model.HSList[i].Location) </td>
+                <td> @Html.Raw(Model.HSList[i].Location) </td>
 
-                        <td> @Html.Raw(Model.HSList[i].Who) </td>
+                <td> @Html.Raw(Model.HSList[i].Who) </td>
 
-                        <td> @Html.Raw(Model.HSList[i].Status) </td>
+                <td> @Html.Raw(Model.HSList[i].Status) </td>
 
 
-                    </tr>
-                }
-            </table>
-        </div>
+            </tr>
+        }
+    </table>
+    
     }
 
     <script>
@@ -369,6 +352,7 @@
 
 </body>
 </html>
+
 
 
 
