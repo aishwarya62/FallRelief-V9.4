@@ -2,7 +2,7 @@
     margin-top: 20px;
 }
 
-// Bootstrap resets
+
 .card {
     border: none;
 }
@@ -12,16 +12,14 @@
 }
 
 .vgr-cards {
-    .card
-
-{
+    .card {
     display: flex;
     flex-flow: wrap;
     flex: 100%;
     margin-bottom: 40px;
-    &:nth-child(even) .card-img-body
 
-{
+    &:nth-child(even) .card-img-body
+        {
     order: 2;
 }
 
